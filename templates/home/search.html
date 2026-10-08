@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Search Result{% endblock title %}
+
+{% block blogactive %}active{% endblock blogactive %}
+
+{% block body %}
+
+<div class="container">
+    <h2>Search result:</h2>
+    <!-- ======================================================================================================================= -->
+    <!-- search engine query  -->
+    <!-- ======================================================================================================================= -->
+
+    {% if allPosts|length < 1 %}
+    Your search query <b>{{ query }}</b> = did not match any document. <br>
+    Suggestions:
+    <ul>
+        <li>Make sure all words are spelled correctly.</li>
+        <li>Try different Keywords.</li>
+        <li>Try more general keywords.</li>
+        <li>Try fewer Keywords.</li>
+    </ul>
+    {% endif %}
+    <!-- ======================================================================================================================= -->
+    {% for post in allPosts %}
+
+    <div class="row border rounded overflow-hidden my-4 shadow-sm">
+        <div class="col p-4 d-flex flex-column">
+
+            <strong class="d-inline-block mb-2 text-primary-emphasis">
+                Article by: {{ post.author }}
+            </strong>
+
+            <h3 class="mb-0">{{ post.title }}</h3>
+
+            <div class="mb-1 text-body-secondary">
+                {{ post.datetime }}
+            </div>
+
+            <p class="card-text mb-auto">
+                {{ post.content|truncatechars:500 }}
+            </p>
+
+            <div class="my-2">
+                <a href="/blog/{{ post.slug }}"
+                    class="btn btn-primary">
+                    Continue reading
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    {% empty %}
+    {% endfor %}
+
+</div>
+
+{% endblock body %}

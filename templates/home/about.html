@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us{% endblock title %}
+
+{% block aboutactive %}active{% endblock aboutactive %}
+
+{% block body %}
+
+<div class="container my-5">
+    <div class="p-2 mb-4 bg-dark rounded-3">
+        <div class="container-fluid py-3">
+            <h1 class="display-5 fw-bold text-white">About iCoder</h1>
+            <p class="col-md-8 fs-5 text-white">
+                Welcome to iCoder, a platform for learning
+                programming, exploring technology, and
+                improving coding skills.
+            </p>
+            <a href="/contact" class="btn btn-primary btn-lg">
+                Contact Us
+            </a>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <h2>Our Mission</h2>
+            <p>
+                Our mission is to make programming easy
+                and accessible through useful tutorials
+                and learning resources.
+            </p>
+        </div>
+
+        <div class="col-md-6">
+            <h2>What We Offer</h2>
+            <p>
+                We provide programming tutorials, web
+                development resources, coding tips,
+                and technology updates.
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

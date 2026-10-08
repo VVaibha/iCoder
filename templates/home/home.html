@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock title %}
+{% block homeactive %}active{% endblock homeactive %}
+{% block body %}
+
+
+<div class="container my-3">
+    <div class="p-5 bg-dark rounded-3 border border-dark  ">
+        <h1 class="display-4 text-white">Welcome to iCoder</h1>
+        <p class="lead text-white">Welcome to my coding website. Learn Python,
+            Django and Web Development.
+        </p>
+        <hr class="my-4 text-white">
+        <p class="text-white">Learn programming and build amazing projects.</p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Go to Blog</a>
+    </div>
+</div>
+
+
+<div class="container">
+    <h2> Popular BlogPost:</h2>
+    <div class="row g-0 border rounded overflow-hidden flex-md-row my-4 mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary-emphasis">World</strong>
+            <h3 class="mb-0">Featured post</h3> 
+            <div class="mb-1 text-body-secondary">Nov 12</div>
+                <p class="card-text mb-auto">This is a wider card with
+                    supporting text below as a natural lead-in to additional content.
+                </p>
+                <a href="#" class="btn btn-primary col-md-2 gap-1 icon-link-hover stretched-link">Continue reading
+                </a>
+            </div>    
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

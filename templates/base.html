@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}{% endblock title %}</title>
+
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+            crossorigin="anonymous">
+
+            
+    </head>
+    <body>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">iCoder</a>
+                <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse"
+                    id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item ">
+                            <a
+                                class="nav-link {% block homeactive%} {% endblock homeactive%}"
+                                aria-current="page"
+                                href="/">Home
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a
+                                class="nav-link {% block aboutactive%} {% endblock aboutactive%}"
+                                href="/about">About
+                            </a>
+                        </li>
+
+                        <li class="nav-item ">
+                            <a
+                                class="nav-link {% block blogactive%} {% endblock blogactive%}"
+                                href="/blog">Blog
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a
+                                class="nav-link {% block contactactive %}{% endblock contactactive %}"
+                                href="/contact">Contact
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- ===================================================================================================================
+                    search
+                    =================================================================================================================== -->
+
+                    <div class="ms-auto d-flex align-items-center">
+
+                        <form method="get" action="/search"
+                            class="d-flex align-items-center my-2 my-lg-0 mx-3">
+                            <input class="form-control me-2" type="search"
+                                placeholder="Search" aria-label="Search"
+                                name="query" id="query">
+                            <button
+                                class="btn btn-primary my-1 my-sm-0 ">Search</button>
+                        </form>
+
+                        <!-- <a href="/admin" role="button" target="_blank"
+                                class="btn btn-outline-success m-lg-1">Admin</a> -->
+
+                        <!-- Button trigger loginmodal -->
+
+                        {% if user.is_authenticated %}
+
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white"
+                                    href="#" role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Welcome {{ request.user }}
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item"
+                                            href="/logout">Log Out</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        {% else %}
+
+                        <button type="button" class="btn btn-primary mx-1"
+                            data-bs-toggle="modal"
+                            data-bs-target="#loginmodal">Log In</button>
+
+                        <!-- Button trigger signupmodal -->
+
+                        <button type="button" class="btn btn-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#signupmodal">Sign Up</button>
+
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        {% for message in messages %}
+
+        <div
+            class="alert alert-{{message.tags}} mb-0 alert-dismissible fade show"
+            role="alert">
+            <strong>Message:</strong> {{message}}
+            <button type="button" class="btn-close"
+                data-bs-dismiss="alert" aria-label="Close">
+            </button>
+        </div>
+        {% endfor %}
+
+        <!-- ================================================================================================ -->
+        <!-- sign up Modal -->
+        <!-- ================================================================================================ -->
+
+        <div class="modal fade" id="signupmodal" tabindex="-1"
+            aria-labelledby="signupmodalLabel" aria-hidden="true">
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="signupmodalLabeltitle">
+                            Sign Up Here
+                        </h1>
+
+                        <button type="button" class="btn-close"
+                            data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <!-- ================================================================================================================ -->
+                        <!-- form -->
+                        <!-- ================================================================================================================ -->
+                        <form action="/signup" method="post">
+                            <div class="mb-3">
+                                <label for="UserName">User Name</label>
+                                <input type="text" class="form-control"
+                                    name="username" id="username"
+                                    placeholder="User Name">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="fame">First Name</label>
+                                <input type="text" class="form-control"
+                                    name="fname" id="fname"
+                                    placeholder="First Name">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="lname">Last Name</label>
+                                <input type="text" class="form-control"
+                                    name="lname" id="lname"
+                                    placeholder="Last Name">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email">Email Address</label>
+                                <input type="email" class="form-control"
+                                    name="email" id="email"
+                                    placeholder="name@gmail.com">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="pass1">Choose a Password</label>
+                                <input type="password" class="form-control"
+                                    name="pass1" id="pass1"
+                                    placeholder="Enter your password">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="pass2">Confirm Password</label>
+                                <input type="password" class="form-control"
+                                    name="pass2" id="pass2"
+                                    placeholder="Enter your password again">
+                            </div>
+                            {% csrf_token %}
+                            <button type="submit"class="btn btn-primary ">
+                                Submit
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================================================ -->
+        <!-- Log In Modal -->
+        <!-- ================================================================================================ -->
+
+        <div class="modal fade" id="loginmodal" tabindex="-1"
+            aria-labelledby="loginmodal" aria-hidden="true">
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="loginmodaltitle">
+                            Log In Here
+                        </h1>
+
+                        <button type="button" class="btn-close"
+                            data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <!-- ================================================================================================================ -->
+                        <!-- form -->
+                        <!-- ================================================================================================================ -->
+                        <form action="/login" method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="loginusername">User Name</label>
+                                <input type="text" class="form-control"
+                                    name="loginusername" id="loginusername"
+                                    placeholder="Enter your username">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="loginpassword">Password</label>
+                                <input type="password" class="form-control"
+                                    name="loginpassword" id="loginpassword"
+                                    placeholder="Enter your password again">
+                            </div>
+
+                            <button type="submit"
+                                class="btn btn-primary">Submit
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% block body %}
+        {% endblock body %}
+
+        {% block js %}
+          
+        {% endblock js %}
+        <!-- Bootstrap JavaScript -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+        </script>
+
+    </body>
+</html>
+
+
+
